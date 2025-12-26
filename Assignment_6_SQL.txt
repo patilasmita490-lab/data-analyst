@@ -1,0 +1,80 @@
+create database session5;
+use session5;
+show tables;
+select * from cars;
+-- 1 Find the average price of cars for each Type of car.
+select type,avg(price) as pricee from cars
+group by type;
+
+
+-- 2 Count how many cars are available for each Manufacturer.
+select manufacturer,count(model) from cars
+group by manufacturer;
+
+
+-- 3 Find the maximum horsepower for each DriveTrain type.
+select DriveTrain,max(horsepower) as horsepower from cars
+group by DriveTrain;
+
+
+-- 4 Show the total number of cars by Origin (USA vs non-USA).
+select origin,count(*) as total from cars
+group by origin;
+
+-- 5 Find the average MPG.city and MPG.highway for each Manufacturer.
+select manufacturer,avg(`MPG.city`) as city, avg(`MPG.highway`) as highway from cars
+group by manufacturer;
+--------------------------------------------------------------
+-- 6 List the top 5 cars with the highest horsepower.
+select * from cars
+order by horsepower desc
+limit 5;
+
+-- 7 Show cars ordered by Price (descending).
+select * from cars
+order by price desc;
+
+-- 8 List all manufacturers ordered by the average weight of their cars.
+select manufacturer,avg(weight) as weight from cars
+group by manufacturer
+order by weight;
+
+-- 9 Find the cars with the lowest MPG.city and order them in ascending order.
+select * from cars
+order by `MPG.city`;
+
+-- 10 Show the 3 most expensive cars from the dataset.
+select * from cars
+order by price desc
+limit 3;
+
+---------------------------------------------------------------------------
+
+-- 11 Select the first 10 cars from the dataset.
+select * from cars
+limit 10;
+
+-- 12 Show the top 3 manufacturers with the most number of cars.
+select manufacturer,count(*) as count from cars
+group by manufacturer
+order by count desc
+limit 3;
+
+
+-- 13 Display the 2 cheapest cars based on Price.
+select * from cars 
+order by price
+limit 2;
+
+-- 14 Find the 5 cars with the highest fuel tank capacity.
+select * from cars
+order by `fuel.tank.capacity`desc
+limit 5;
+
+-- 15 Show the top 3 midsize cars with the lowest weight.
+select model,min(weight) as count from cars
+where type='midsize'
+group by model
+order by model desc,count asc 
+limit 3;
+
